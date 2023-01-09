@@ -1,0 +1,46 @@
+body {
+    height: 100vh;
+    overflow-y: scroll;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.sok-namn {
+    width: 15vw;
+}
+
+.wrapper{
+    display: flex;
+}
+.studentWrapper{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.coursewrapper{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.teacher{
+    padding: 5px;
+    margin: 5px;
+    border-radius: 15px;
+    border: rgb(0, 0, 0) solid 2px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.respon{
+    padding: 15px;
+    height: 75px;
+    background-color: orange;
+    border-radius: 10px;
+    border: solid black;
+}
+.students{
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    border: solid black;
+}
