@@ -38,7 +38,7 @@ function renderStudents (student) {
         div.appendChild("kurserna");
         kurserna.innertext = course[i].title + "\n" + student.courses[i].startet.semester + " " + student.courses[i].started.year + " / " + student.courses[i].passedcredits + " of " + course[i].totalCredits + "credits";
 
-        if (courses[i].totalCredits == student.courses[i].passedcredits){
+        if (course[i].totalCredits == student.courses[i].passedcredits){
             kurserna.style.backgroundColor = "Lime";
         }
     }
