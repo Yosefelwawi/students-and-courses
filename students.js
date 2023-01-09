@@ -1,48 +1,66 @@
 'use strict'
 
-let searchStudent = document.querySelector("sok-namn");
+let searchbox = document.querySelector(".sok-namn");
+
+function searchStudent () {
+  let student = DATABASE.students
+    .filter((student) => student.lastName.toLowerCase().includes(searchbox.value.toLowerCase()));
+
+    // Bokstavsordning sortering a,b,c
+    student.sort(function (a, b) {
+        if (a.lastName > b.lastName) {
+            return 1;
+        } 
+        if (a.lastName < b.lastName) {
+            return -1;
+        }
+        return 0; 
+    });
+
+  return student;
+}
 
 // Eventlistner för vår searchbox
+searchbox.addEventListener('keyup', function () {
+  let findStudent = searchStudent();
+  document.querySelector(".resultat").innerHTML = "";
+  skaparHTML(findStudent);
 
-searchStudent.addEventListener('keyup', function () {
-    let foundStudent = searchStudent ();
-
-    document.querySelector("resultat").innerHTML = "";
-    skaparHTML(foundStudent);
-
-    if (searchStudent.value == "") {
-        document.querySelector("resultat").innerHTML = "";
-    }
-    
+  if (searchbox.value == ""){
+    document.querySelector(".resultat").innerHTML = "";
+  }
 });
 
+// renderar studenter
 function renderStudents (student) {
-    let resultat = document.querySelector("resultat");
-    let studentNamn = document.createElement("h3");
-    let div  = document.createElement("div");
+    let resultat = document.querySelector(".resultat");
+    let div = document.createElement("div");
+    let studentNamn = document.createElement("h2");
     div.classList.add("studentWrapper");
 
     let studentCourse = findStudentCourse(student);
     let credits = studentCourse.reduce(function(a, b){return a + b}, 0);
 
-    studentNamn.innerText = student.firstname +  " " + student.lastname + "(total credits: " + credits + ")";
-    resultat.appendeChild(studentNamn);
+    studentNamn.innerText = student.firstName + " " + student.lastName + " (total credits: " + credits + ")";
+    resultat.appendChild(studentNamn);
     resultat.appendChild(div);
 
-    let course = courseById (student);
+    let course = courseById(student);
 
-    for (let i = 0; i < course.length; i ++) {
-        let kurserna = document.createElement("div");
-        kurserna.classList.add("kurser");
 
-        div.appendChild("kurserna");
-        kurserna.innertext = course[i].title + "\n" + student.courses[i].startet.semester + " " + student.courses[i].started.year + " / " + student.courses[i].passedcredits + " of " + course[i].totalCredits + "credits";
+    for (let i = 0; i < course.length; i ++){
+        let courses = document.createElement("div");
+        courses.classList.add("courses");
 
-        if (course[i].totalCredits == student.courses[i].passedcredits){
-            kurserna.style.backgroundColor = "Lime";
+        div.appendChild(courses);
+        courses.innerText = course[i].title + "\n" + student.courses[i].started.semester + " " + student.courses[i].started.year + " / " 
+        + student.courses[i].passedCredits + " of " + course[i].totalCredits + " credits";
+        
+        if (course[i].totalCredits == student.courses[i].passedCredits){
+            courses.style.backgroundColor = "lime";
         }
     }
-
+    
 }
 
 function skaparHTML (elev) {
@@ -64,22 +82,16 @@ function courseById (student) {
     return stCourses;
 }
 
-// bokstavsordning
+function findStudentCourse (student) {
+    
+    let findStudentCourse = [];
 
-function searchStudent () {
-    let student = DATABASE.students.filter((student) => student.lastname.toLowerCase().includes(searchStudent.value.toLowerCase()));
-
-    student.sort(function (a, b){
-        if (a.lastname > b.lastname) {
-            return 1;
+    for (let studentCourse of student.courses) {
+        for (let dbCourse of DATABASE.courses) {
+            if (studentCourse.courseId == dbCourse.courseId) {
+                findStudentCourse.push(studentCourse.passedCredits);
+            }
         }
-        if (a.lastname < b.lastname) {
-            return -1;
-        }
-
-        return 0;
-        
-    })
-
-    return student;
+    }
+    return findStudentCourse;
 }
