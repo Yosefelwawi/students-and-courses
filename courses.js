@@ -89,49 +89,50 @@ function renderCourse (course) {
 }
 
 
-function skaparHTML (kurser) {
-    for (let course of kurser) {
-        renderStudents(course);
+
+function skaparHTML (kurs) {
+    for (let course of kurs){
+        renderCourse(course);
     }
 }
 
 //hittar rätt ID för rätt student
-function studentById (course) {
-    let fStudents = [];
+function studentsById(course) {
+    let hittadStudent = [];
 
     for (let student of DATABASE.students) {
-        for (let sCourse of student.courses) {
-            if (sCourse.couseId == course.courseId) {
-                fStudents.push(student);
+        for (let studentCourse of student.courses) {
+            if (studentCourse.courseId == course.courseId) {
+                hittadStudent.push(student);
             }
         }
     }
-    return fStudents;
+    return hittadStudent;
 }
 
-// Hittar rätt lärare
 
-function responTeacher (course) {
+// Hittar rätt lärare
+function repsonTeacher (course) {
     let responTeacher = [];
 
     for (let teacher of DATABASE.teachers) {
-        if (teacher.teacherId == course.courseResponsible) {
+         if (teacher.teacherId == course.courseResponsible) {
             responTeacher.push(teacher);
-        }
+        }  
     }
     return responTeacher;
 }
 
-function allTeachers (course) {
-    let allTeachers = [];
-    for ( let teacher of DATABASE.teachers) {
-        for (let singleTeacher of course.teachers) 
-            if (teacher.teacherId == singleTeacher){
-                allTeachers.push(teacher);
-            }
-    }
+function teachers (course){
+    let everyTeacher = [];
 
-    return allTeachers;
+    for (let teacher of DATABASE.teachers){
+        for(let singleTeacher of course.teachers)
+        if (teacher.teacherId == singleTeacher){
+            everyTeacher.push(teacher);
+        }
+    }
+    return everyTeacher;
 }
 
 // bokstavsordning
