@@ -7,14 +7,21 @@ body {
   margin: 20;
 }
 
-.sok-namn {
-    width: 20vw;
+.searchBox {
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
 }
 
 .container{
     display: flex;
 }
 .studentWrapper{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.courseWrapper{
     display: grid;
     grid-template-columns: auto auto auto;
 }
@@ -54,4 +61,5 @@ body {
     border-radius: 15px;
     padding: 10px;
     margin: 5px;
+    min-width: 1000px;
   }
