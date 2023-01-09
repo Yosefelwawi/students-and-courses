@@ -139,6 +139,6 @@ function teachers (course){
     return everyTeacher;
 }
 
-// bokstavsordning
+
 
 
