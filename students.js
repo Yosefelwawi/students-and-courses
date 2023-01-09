@@ -1,0 +1,1 @@
+let searchStudent = document.getElementsByClassName("sok-namn");
