@@ -16,7 +16,7 @@ searchCourse.addEventListener('keyup', function () {
     
 });
 
-function renderCourses (student) {
+function renderCourses (course) {
     let resultat = document.querySelector("resultat");
     let titleCourse = document.createElement("h3");
     let div  = document.createElement("div");
@@ -105,7 +105,7 @@ function responTeacher (course) {
 
     for (let teacher of DATABASE.teachers) {
         if (teacher.teacherId == course.courseResponsible) {
-            responTeacher.push(techer);
+            responTeacher.push(teacher);
         }
     }
     return responTeacher;
