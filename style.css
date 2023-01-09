@@ -7,8 +7,10 @@ body {
   margin: 20;
 }
 
-.sok-namn {
-    width: 20vw;
+.searchBox {
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
 }
 
 .container{
@@ -54,4 +56,5 @@ body {
     border-radius: 15px;
     padding: 10px;
     margin: 5px;
+    min-width: 1000px;
   }
