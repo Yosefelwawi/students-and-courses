@@ -21,7 +21,7 @@ function findCourse () {
 
 searchBox.addEventListener("keyup", function(){
     let foundCourse = findCourse ();
-    document.querySelector(".resultat");
+    document.querySelector(".resultat").innerHTML = "";
     skaparHTML(foundCourse);
 
     if (searchBox.value == ""){
