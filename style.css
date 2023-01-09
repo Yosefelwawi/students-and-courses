@@ -44,3 +44,17 @@ body {
     border-radius: 10px;
     border: solid black;
 }
+
+.kurserna {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 20px;
+    border: solid black 4px;
+}
+.resultat > div {
+    background-color: rgba(78, 78, 78, 0.5);
+    border: solid 2px rgb(107, 107, 107);
+    border-radius: 15px;
+    padding: 10px;
+    margin: 5px;
+  }
