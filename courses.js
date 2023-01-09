@@ -33,7 +33,9 @@ function renderCourse (course) {
     let resultat = document.querySelector(".resultat");
     let div = document.createElement("div");
     let titleCourse = document.createElement("h2");
-    div.classList.add("studentWrapper");
+    div.classList.add("courseWrapper");
+
+    div.innerHTML = "Courses:";
 
     titleCourse.innerText = course.title + " (" + course.totalCredits + " credits)";
     
