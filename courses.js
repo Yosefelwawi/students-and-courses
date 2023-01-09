@@ -7,23 +7,23 @@ let searchCourses = document.querySelector(".sok-kurs");
 searchCourses.addEventListener('keyup', function () {
     let foundCourse = searchCourse ();
 
-    document.querySelector(".resultat").innerHTML = "";
+    document.querySelector("resultat");
     skaparHTML(foundCourse);
 
     if (searchCourses.value == "") {
-        document.querySelector("resultat").innerHTML = "";
+        document.querySelector("resultat");
     }
-    console.log("hej");
+    
 });
 
 function renderCourses (course) {
-    let resultat = document.querySelector("resultat");
+    let resultat = document.querySelector(".resultat");
     let titleCourse = document.createElement("h3");
     let div  = document.createElement("div");
     div.classList.add("courseWrapper");
 
     titleCourse.innerText = course.title +  " (" + course.totalCredits + "credits)";
-    resultat.appendeChild(titleCourse);
+    resultat.appendChild(titleCourse);
     resultat.appendChild(div);
 
     let hittadStudent = studentById(course);
@@ -80,7 +80,7 @@ function renderCourses (course) {
 
 function skaparHTML (kurser) {
     for (let course of kurser) {
-        renderStudents(course);
+        renderCourses(course);
     }
 }
 
@@ -100,7 +100,7 @@ function studentById (course) {
 
 // Hittar rätt lärare
 
-function responTeacher (course) {
+function getHeadTeacher (course) {
     let responTeacher = [];
 
     for (let teacher of DATABASE.teachers) {
@@ -111,7 +111,7 @@ function responTeacher (course) {
     return responTeacher;
 }
 
-function allTeachers (course) {
+function getTeacher (course) {
     let allTeachers = [];
     for ( let teacher of DATABASE.teachers) {
         for (let singleTeacher of course.teachers) 
