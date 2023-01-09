@@ -1,19 +1,34 @@
 'use strict'
 
-let searchStudent = document.querySelector("sok-namn");
+let searchbox = document.querySelector(".sok-namn");
+
+function searchStudent () {
+  let student = DATABASE.students
+    .filter((student) => student.lastName.toLowerCase().includes(searchbox.value.toLowerCase()));
+
+    // Bokstavsordning sortering a,b,c
+    student.sort(function (a, b) {
+        if (a.lastName > b.lastName) {
+            return 1;
+        } 
+        if (a.lastName < b.lastName) {
+            return -1;
+        }
+        return 0; 
+    });
+
+  return student;
+}
 
 // Eventlistner för vår searchbox
+searchbox.addEventListener('keyup', function () {
+  let findStudent = searchStudent();
+  document.querySelector(".resultat").innerHTML = "";
+  skaparHTML(findStudent);
 
-searchStudent.addEventListener('keyup', function () {
-    let foundStudent = searchStudent ();
-
-    document.querySelector("resultat").innerHTML = "";
-    skaparHTML(foundStudent);
-
-    if (searchStudent.value == "") {
-        document.querySelector("resultat").innerHTML = "";
-    }
-    
+  if (searchbox.value == ""){
+    document.querySelector(".resultat").innerHTML = "";
+  }
 });
 
 function renderStudents (student) {
@@ -64,22 +79,16 @@ function courseById (student) {
     return stCourses;
 }
 
-// bokstavsordning
+function findStudentCourse (student) {
+    
+    let findStudentCourse = [];
 
-function searchStudent () {
-    let student = DATABASE.students.filter((student) => student.lastname.toLowerCase().includes(searchStudent.value.toLowerCase()));
-
-    student.sort(function (a, b){
-        if (a.lastname > b.lastname) {
-            return 1;
+    for (let studentCourse of student.courses) {
+        for (let dbCourse of DATABASE.courses) {
+            if (studentCourse.courseId == dbCourse.courseId) {
+                findStudentCourse.push(studentCourse.passedCredits);
+            }
         }
-        if (a.lastname < b.lastname) {
-            return -1;
-        }
-
-        return 0;
-        
-    })
-
-    return student;
+    }
+    return findStudentCourse;
 }
