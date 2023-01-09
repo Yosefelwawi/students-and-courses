@@ -8,10 +8,10 @@ body {
 }
 
 .sok-namn {
-    width: 15vw;
+    width: 20vw;
 }
 
-.wrapper{
+.container{
     display: flex;
 }
 .studentWrapper{
@@ -19,11 +19,7 @@ body {
     grid-template-columns: auto auto auto;
 }
 
-.coursewrapper{
-    display: grid;
-    grid-template-columns: auto auto auto;
-}
-.teacher{
+.teacherN{
     padding: 5px;
     margin: 5px;
     border-radius: 15px;
@@ -46,7 +42,7 @@ body {
     border: solid black;
 }
 
-.kurserna {
+.courses {
     padding: 10px;
     margin: 5px;
     border-radius: 20px;
