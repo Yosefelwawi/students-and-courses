@@ -1,19 +1,31 @@
 'use strict'
 
-let searchCourses = document.querySelector(".sok-kurs");
+let searchBox = document.querySelector("sok-kurs");
 
+function findCourse () {
+  let course = DATABASE.courses
+    .filter((course) => course.title.toLowerCase().includes(searchBox.value));
+// sortera efter kurs a,b,c
+    course.sort(function (a, b) {
+        if (a.title > b.title) {
+            return 1;
+        } 
+        if (a.title < b.title) {
+            return -1;
+        }
+        return 0; 
+    });
+    return course; 
+}
 // Eventlistner för vår searchbox
-
-searchCourses.addEventListener('keyup', function () {
-    let foundCourse = searchCourse ();
-
+searchBox.addEventListener("keyup", function(){
+    let foundCourse = findCourse ();
     document.querySelector(".resultat").innerHTML = "";
     skaparHTML(foundCourse);
 
-    if (searchCourses.value == "") {
-        document.querySelector("resultat").innerHTML = "";
+    if (searchBox.value == ""){
+        document.querySelector(".resultat").innerHTML = "";
     }
-    console.log("hej");
 });
 
 function renderCourses (course) {
@@ -125,20 +137,4 @@ function allTeachers (course) {
 
 // bokstavsordning
 
-function searchCourse () {
-    let course = DATABASE.courses.filter((course) => course.title.toLowerCase().includes(searchCourses.value.toLowerCase()));
 
-    course.sort(function (a, b){
-        if (a.title > b.title) {
-            return 1;
-        }
-        if (a.title < b.title) {
-            return -1;
-        }
-
-        return 0;
-        
-    })
-
-    return course;
-}
