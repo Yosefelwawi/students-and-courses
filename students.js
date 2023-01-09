@@ -25,7 +25,7 @@ function renderStudents (student) {
     let studentCourse = findStudentCourse(student);
     let credits = studentCourse.reduce(function(a, b){return a + b}, 0);
 
-    studentNamn.innerText = student.firstname +  " " + student.lastname + "(total credits: " + totalCredits + ")";
+    studentNamn.innerText = student.firstname +  " " + student.lastname + "(total credits: " + credits + ")";
     resultat.appendeChild(studentNamn);
     resultat.appendChild(div);
 
@@ -37,6 +37,29 @@ function renderStudents (student) {
 
         div.appendChild("kurserna");
         kurserna.innertext = course[i].title + "\n" + student.courses[i].startet.semester + " " + student.courses[i].started.year + " / " + student.courses[i].passedcredits + " of " + courses[i].totalCredits + "credits";
+
+        if (courses[i].totalCredits == student.courses[i].passedcredits){
+            kurserna.style.backgroundColor = "Lime";
+        }
     }
 
+}
+
+function skaparHTML (elev) {
+    for (let student of elev) {
+        renderStudents(student);
+    }
+}
+
+function courseById (student) {
+    let stCourses = [];
+
+    for (let stCourses of student.courses) {
+        for ( let courseDatabase of DATABASE.courses) {
+            if (stCourses.courseId == courseDatabase.courseId) {
+                stCourses.push(stCourses.passedcredits)
+            }
+        }
+    }
+    return stCourses;
 }
