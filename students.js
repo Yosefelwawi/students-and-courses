@@ -38,6 +38,8 @@ function renderStudents (student) {
     let studentNamn = document.createElement("h2");
     div.classList.add("studentWrapper");
 
+    div.innerHTML = "Courses:";
+
     let studentCourse = findStudentCourse(student);
     let credits = studentCourse.reduce(function(a, b){return a + b}, 0);
 
