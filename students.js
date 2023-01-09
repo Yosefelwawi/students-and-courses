@@ -31,33 +31,36 @@ searchbox.addEventListener('keyup', function () {
   }
 });
 
+// renderar studenter
 function renderStudents (student) {
-    let resultat = document.querySelector("resultat");
-    let studentNamn = document.createElement("h3");
-    let div  = document.createElement("div");
+    let resultat = document.querySelector(".resultat");
+    let div = document.createElement("div");
+    let studentNamn = document.createElement("h2");
     div.classList.add("studentWrapper");
 
     let studentCourse = findStudentCourse(student);
     let credits = studentCourse.reduce(function(a, b){return a + b}, 0);
 
-    studentNamn.innerText = student.firstname +  " " + student.lastname + "(total credits: " + credits + ")";
-    resultat.appendeChild(studentNamn);
+    studentNamn.innerText = student.firstName + " " + student.lastName + " (total credits: " + credits + ")";
+    resultat.appendChild(studentNamn);
     resultat.appendChild(div);
 
-    let course = courseById (student);
+    let course = courseById(student);
 
-    for (let i = 0; i < course.length; i ++) {
-        let kurserna = document.createElement("div");
-        kurserna.classList.add("kurser");
 
-        div.appendChild("kurserna");
-        kurserna.innertext = course[i].title + "\n" + student.courses[i].startet.semester + " " + student.courses[i].started.year + " / " + student.courses[i].passedcredits + " of " + course[i].totalCredits + "credits";
+    for (let i = 0; i < course.length; i ++){
+        let courses = document.createElement("div");
+        courses.classList.add("courses");
 
-        if (course[i].totalCredits == student.courses[i].passedcredits){
-            kurserna.style.backgroundColor = "Lime";
+        div.appendChild(courses);
+        courses.innerText = course[i].title + "\n" + student.courses[i].started.semester + " " + student.courses[i].started.year + " / " 
+        + student.courses[i].passedCredits + " of " + course[i].totalCredits + " credits";
+        
+        if (course[i].totalCredits == student.courses[i].passedCredits){
+            courses.style.backgroundColor = "lime";
         }
     }
-
+    
 }
 
 function skaparHTML (elev) {
