@@ -18,6 +18,7 @@ function findCourse () {
     return course; 
 }
 // Eventlistner för vår searchbox
+
 searchBox.addEventListener("keyup", function(){
     let foundCourse = findCourse ();
     document.querySelector(".resultat").innerHTML = "";
@@ -35,6 +36,7 @@ function renderCourse (course) {
     div.classList.add("studentWrapper");
 
     titleCourse.innerText = course.title + " (" + course.totalCredits + " credits)";
+    
     resultat.appendChild(titleCourse);
     resultat.appendChild(div);
 // kurs lärare 
@@ -89,7 +91,6 @@ function renderCourse (course) {
 }
 
 
-
 function skaparHTML (kurs) {
     for (let course of kurs){
         renderCourse(course);
@@ -125,6 +126,7 @@ function repsonTeacher (course) {
 
 function teachers (course){
     let everyTeacher = [];
+
 
     for (let teacher of DATABASE.teachers){
         for(let singleTeacher of course.teachers)

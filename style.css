@@ -1,9 +1,10 @@
 body {
-    height: 100vh;
-    overflow-y: scroll;
-    
     display: flex;
-    flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+  padding: 10px;
+  overflow-y: scroll;
+  margin: 20;
 }
 
 .sok-namn {
