@@ -5,7 +5,7 @@ let searchStudent = document.querySelector("sok-namn");
 // Eventlistner för vår searchbox
 
 searchStudent.addEventListener('keyup', function () {
-    let foundStudent = students ();
+    let foundStudent = searchStudent ();
 
     document.querySelector("resultat").innerHTML = "";
     createHTML(foundStudent);
@@ -62,4 +62,24 @@ function courseById (student) {
         }
     }
     return stCourses;
+}
+
+// bokstavsordning
+
+function searchStudent () {
+    let student = DATABASE.students.filter((studnet) => student.lastname.toLowerCase().includes(searchStudent.value.toLowerCase()));
+
+    student.sort(function (a, b){
+        if (a.lastname > b.lastname) {
+            return 1;
+        }
+        if (a.lastname < b.lastname) {
+            return -1;
+        }
+
+        return 0;
+        
+    })
+
+    return student;
 }
