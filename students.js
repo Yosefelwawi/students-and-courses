@@ -68,18 +68,15 @@ function skaparHTML (elev) {
         renderStudents(student);
     }
 }
-
-function courseById (student) {
+function courseById(student) {
     let stCourses = [];
 
-    for (let stCourses of student.courses) {
-        for ( let courseDatabase of DATABASE.courses) {
-            if (stCourses.courseId == courseDatabase.courseId) {
-                stCourses.push(stCourses.passedcredits)
-            }
-        }
+    for (let i = 0; i < student.courses.length; i ++) {
+        stCourses.push(DATABASE.courses.find(course => {
+            return course.courseId == student.courses[i].courseId; 
+        }))
     }
-    return stCourses;
+    return course;
 }
 
 function findStudentCourse (student) {
