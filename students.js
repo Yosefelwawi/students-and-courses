@@ -36,7 +36,7 @@ function renderStudents (student) {
         kurserna.classList.add("kurser");
 
         div.appendChild("kurserna");
-        kurserna.innertext = course[i].title + "\n" + student.courses[i].startet.semester + " " + student.courses[i].started.year + " / " + student.courses[i].passedcredits + " of " + courses[i].totalCredits + "credits";
+        kurserna.innertext = course[i].title + "\n" + student.courses[i].startet.semester + " " + student.courses[i].started.year + " / " + student.courses[i].passedcredits + " of " + course[i].totalCredits + "credits";
 
         if (courses[i].totalCredits == student.courses[i].passedcredits){
             kurserna.style.backgroundColor = "Lime";
@@ -67,7 +67,7 @@ function courseById (student) {
 // bokstavsordning
 
 function searchStudent () {
-    let student = DATABASE.students.filter((studnet) => student.lastname.toLowerCase().includes(searchStudent.value.toLowerCase()));
+    let student = DATABASE.students.filter((student) => student.lastname.toLowerCase().includes(searchStudent.value.toLowerCase()));
 
     student.sort(function (a, b){
         if (a.lastname > b.lastname) {
