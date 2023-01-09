@@ -76,7 +76,7 @@ function courseById(student) {
             return course.courseId == student.courses[i].courseId; 
         }))
     }
-    return course;
+    return stCourses;
 }
 
 function findStudentCourse (student) {

@@ -1,6 +1,6 @@
 'use strict'
 
-let searchBox = document.querySelector("sok-kurs");
+let searchBox = document.querySelector(".sok-kurs");
 
 function findCourse () {
   let course = DATABASE.courses
@@ -21,7 +21,7 @@ function findCourse () {
 
 searchBox.addEventListener("keyup", function(){
     let foundCourse = findCourse ();
-    document.querySelector(".resultat").innerHTML = "";
+    document.querySelector(".resultat");
     skaparHTML(foundCourse);
 
     if (searchBox.value == ""){
