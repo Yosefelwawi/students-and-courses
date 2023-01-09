@@ -21,6 +21,11 @@ body {
     grid-template-columns: auto auto auto;
 }
 
+.courseWrapper{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
 .teacherN{
     padding: 5px;
     margin: 5px;
