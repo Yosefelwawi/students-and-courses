@@ -28,67 +28,66 @@ searchBox.addEventListener("keyup", function(){
     }
 });
 
-function renderCourses (course) {
-    let resultat = document.querySelector("resultat");
-    let titleCourse = document.createElement("h3");
-    let div  = document.createElement("div");
-    div.classList.add("courseWrapper");
+function renderCourse (course) {
+    let resultat = document.querySelector(".resultat");
+    let div = document.createElement("div");
+    let titleCourse = document.createElement("h2");
+    div.classList.add("studentWrapper");
 
-    titleCourse.innerText = course.title +  " (" + course.totalCredits + "credits)";
-    resultat.appendeChild(titleCourse);
+    titleCourse.innerText = course.title + " (" + course.totalCredits + " credits)";
+    resultat.appendChild(titleCourse);
     resultat.appendChild(div);
-
-    let hittadStudent = studentById(course);
-    let headTeacher = getHeadTeacher(course);
-    let teachers = getTeacher(course);
-
-    let studentCourses = [];
-
-    for (let student of hittadStudent) {
+// kurs lärare 
+    let hittadStudent = studentsById(course);
+    let headTeacher = repsonTeacher(course);
+    let everyTeacher = teachers(course);
+    let stCourses = [];
+    
+    for (let student of hittadStudent){
         for (let studentCourse of student.courses){
-            if (studentCourse.courseId == course.courseId) {
-                studentCourses.push(studentCourse);
+            if (studentCourse.courseId == course.courseId){
+                stCourses.push(studentCourse);
             }
         }
     }
 
-    for (let i = 0; i < hittadStudent.length; i ++) {
+    for (let i = 0; i < hittadStudent.length; i ++){
         let students = document.createElement("div");
         students.classList.add("students");
 
-        div.appendChild("students");
-        students.innertext = hittadStudent[i].firstname + " " + hittadStudent[i].lastname + "(" + studentCourses[i].passedCredits +" credits)"  + "\n" + "started: "+ studentCourses[i].started.semester + " " + studentCourses[i].started.year;
-
-
-        if (studentCourses[i].passedCredits == course.totalCredits){
-            students.style.backgroundColor = "Lime";
+        div.appendChild(students);
+        students.innerText = hittadStudent[i].firstName + " " + hittadStudent[i].lastName + " (" + stCourses[i].passedCredits +" credits)" + "\n" + "Started: "+ stCourses[i].started.semester + " " + stCourses[i].started.year; 
+        
+        if (stCourses[i].passedCredits == course.totalCredits){
+            students.style.backgroundColor = "lime";
         }
     }
 
-    let responDiv = document.createElement("div");
-    responDiv.innerHTML = "Course Responsible: ";
+    let responDiv = document.createElement("div"); 
+    responDiv.innerHTML = "Course responsible: ";
     responDiv.classList.add("respon");
     div.appendChild(responDiv);
 
-    for ( let i = 0; i < headTeacher.length; i ++) {
-        let responT = document.createElement("p");
-        responT.classList.add("responT");
-        responDiv.appendChild(responT);
-        responT.innerText = headTeacher[i].firstname + " " + headTeacher[i].lastname + "(" + headTeacher[i].post + ")";
+
+    for (let i = 0; i < headTeacher.length; i++) {
+        let responsible = document.createElement("p");
+        responsible.classList.add("responsible");
+        responDiv.appendChild(responsible); 
+        responsible.innerText = headTeacher[i].firstName + " " + headTeacher[i].lastName + " (" + headTeacher[i].post + ")";
     }
 
-    let teacher = document.createElement("div");
-    teacher.classList.add("teacher");
-    div.appendChild(teacher);
-    teacher.innertext = "Teachers: ";
+    let teacherN = document.createElement("div");
+    teacherN.classList.add("teacherN");
+    div.appendChild(teacherN);
+    teacherN.innerText = "Teachers: ";
 
-    for(let i = 0; i < teachers.length; i ++) {
+    for(let i = 0; i < everyTeacher.length; i++){
         let teacherA = document.createElement("p");
-        teacher.appendChild(teacherA);
-        teacherA.innerText = teachers[i].firstname + " " + teachers[i].lastname + " (" + teachers[i].post + ")";
-        
+        teacherN.appendChild(teacherA); 
+        teacherA.innerText =  everyTeacher[i].firstName + " " + everyTeacher[i].lastName + " (" + everyTeacher[i].post + ")";
     }
 }
+
 
 function skaparHTML (kurser) {
     for (let course of kurser) {
