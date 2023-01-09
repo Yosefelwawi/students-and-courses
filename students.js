@@ -8,7 +8,7 @@ searchStudent.addEventListener('keyup', function () {
     let foundStudent = searchStudent ();
 
     document.querySelector("resultat").innerHTML = "";
-    createHTML(foundStudent);
+    skaparHTML(foundStudent);
 
     if (searchStudent.value == "") {
         document.querySelector("resultat").innerHTML = "";
